@@ -25,14 +25,14 @@ NIGHT_MODE_MAP = {
 @tree.command(name="print", description="Twitter(X)のURLからツイートの画像を生成します")
 @app_commands.describe(
     url="TwitterまたはXのツイートURL",
-    theme="画像のテーマ（デフォルト: ダークモード）",
+    theme="画像のテーマ（デフォルト: ライトモード）",
 )
 @app_commands.choices(theme=[
     app_commands.Choice(name="ライトモード", value="light"),
     app_commands.Choice(name="ダークモード", value="dark"),
     app_commands.Choice(name="ブラックモード (OLED)", value="black"),
 ])
-async def print_tweet(interaction: discord.Interaction, url: str, theme: str = "dark"):
+async def print_tweet(interaction: discord.Interaction, url: str, theme: str = "light"):
     # URLバリデーション
     if not ("twitter.com/" in url or "x.com/" in url) or "/status/" not in url:
         await interaction.response.send_message(
@@ -44,7 +44,7 @@ async def print_tweet(interaction: discord.Interaction, url: str, theme: str = "
     # スクリーンショット生成には時間がかかるので先に応答を保留
     await interaction.response.defer()
 
-    night_mode = NIGHT_MODE_MAP.get(theme, 1)
+    night_mode = NIGHT_MODE_MAP.get(theme, 0)
 
     try:
         # TweetCaptureのインスタンスを作成
