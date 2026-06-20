@@ -20,13 +20,17 @@ pip install -r requirements.txt
 ```
 
 ### 2. 環境変数の設定
-`.env.example` を `.env` にコピーして、Discord Botのトークンを記載してください。
+`.env.example` を `.env` にコピーして、Discord BotのトークンとTwitterのauth_tokenを記載してください。
 ```bash
 copy .env.example .env
 ```
 ```env
 DISCORD_TOKEN=ここにBotのトークンを貼り付けてください
+AUTH_TOKEN=ここにTwitterのauth_tokenクッキーの値を貼り付けてください
 ```
+
+> **注意:** 最近のTwitterの仕様変更により、ログインしていないとツイートが取得できません。
+> ブラウザでX(Twitter)にログインし、開発者ツール(F12)の「Application」タブ -> 「Cookies」から `auth_token` という名前のクッキーの値をコピーして `.env` の `AUTH_TOKEN` に設定してください。
 
 ### 3. Discord Botの準備
 1. [Discord Developer Portal](https://discord.com/developers/applications) で新しいアプリケーションを作成
